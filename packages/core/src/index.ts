@@ -10,4 +10,5 @@ export * from "./IntifaceBackendLogger";
 export * from "./IntifaceFrontendLogger";
 export * from "./IntifaceLogger";
 export * from "./GithubReleaseManager";
+export * from "./ProxyServer";
 export * from "./Utils";

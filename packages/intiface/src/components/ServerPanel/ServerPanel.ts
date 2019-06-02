@@ -1,7 +1,6 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import { IntifaceConfiguration, FrontendConnector } from "intiface-core-library";
-import { IntifaceProtocols } from "intiface-protocols";
 
 @Component({})
 export default class ServerPanel extends Vue {

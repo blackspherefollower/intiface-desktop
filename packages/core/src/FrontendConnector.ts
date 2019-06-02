@@ -99,6 +99,20 @@ export abstract class FrontendConnector extends EventEmitter {
     await this.SendMessageExpectOk(msg);
   }
 
+  public async StartProxy() {
+    const msg = IntifaceProtocols.IntifaceFrontendMessage.create({
+      startProxy: IntifaceProtocols.IntifaceFrontendMessage.StartProxy.create(),
+    });
+    await this.SendMessageExpectOk(msg);
+  }
+
+  public async StopProxy() {
+    const msg = IntifaceProtocols.IntifaceFrontendMessage.create({
+      stopProxy: IntifaceProtocols.IntifaceFrontendMessage.StopProxy.create(),
+    });
+    await this.SendMessageExpectOk(msg);
+  }
+
   public async GenerateCertificate() {
     const msg = IntifaceProtocols.IntifaceFrontendMessage.create({
       generateCertificate: IntifaceProtocols.IntifaceFrontendMessage.GenerateCertificate.create(),

@@ -8,6 +8,7 @@ import { CertManager } from "./CertManager";
 import { IntifaceUtils } from "./Utils";
 import { IApplicationUpdater } from "./IApplicationUpdater";
 import { IntifaceBackendLogger } from "./IntifaceBackendLogger";
+import { ProxyServer } from "./ProxyServer";
 import isOnline from "is-online";
 import * as winston from "winston";
 
@@ -35,6 +36,7 @@ export class IntifaceBackendManager {
   private _configManager: IntifaceConfigurationManager;
   private _applicationUpdater: IApplicationUpdater;
   private _ghManagers: Set<GithubReleaseManager> = new Set<GithubReleaseManager>();
+  private _proxyServer: ProxyServer | null = null;
 
   protected constructor(aConnector: BackendConnector,
                         aConfig: IntifaceConfigurationFileManager,
@@ -269,6 +271,19 @@ export class IntifaceBackendManager {
     this._connector.SendOk(aMsg);
   }
 
+  private async StartProxyServer(aMsg: IntifaceProtocols.IntifaceFrontendMessage) {
+    this._proxyServer = new ProxyServer(this._configManager.Config);
+    this._proxyServer.StartProxy();
+    this._connector.SendOk(aMsg);
+  }
+
+  private async StopProxyServer(aMsg: IntifaceProtocols.IntifaceFrontendMessage) {
+    if (this._proxyServer) {
+      this._proxyServer.StopProxy();
+    }
+    this._connector.SendOk(aMsg);
+  }
+
   private async ReceiveFrontendMessage(aMsg: IntifaceProtocols.IntifaceFrontendMessage) {
     // TODO Feels like there should be a better way to do this :c
     if (aMsg.startProcess !== null) {
@@ -282,7 +297,12 @@ export class IntifaceBackendManager {
     }
 
     if (aMsg.startProxy !== null) {
-      // TODO Fill in once proxy is done
+      await this.StartProxyServer(aMsg);
+      return;
+    }
+
+    if (aMsg.stopProxy !== null) {
+      await this.StopProxyServer(aMsg);
       return;
     }
 

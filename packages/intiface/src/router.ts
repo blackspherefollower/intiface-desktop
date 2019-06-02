@@ -6,6 +6,7 @@ import SettingsPanel from "./components/SettingsPanel/SettingsPanel";
 import SetupPanel from "./components/SetupPanel/SetupPanel";
 import LogPanel from "./components/LogPanel/LogPanel";
 import HomePanel from "./components/HomePanel/HomePanel";
+import ProxyPanel from "./components/ProxyPanel/ProxyPanel";
 
 Vue.use(Router);
 
@@ -44,6 +45,11 @@ export default new Router({
       path: "/setup",
       name: "setup",
       component: SetupPanel,
+    },
+    {
+      path: "/proxy",
+      name: "proxy",
+      component: ProxyPanel,
     },
   ],
 });
