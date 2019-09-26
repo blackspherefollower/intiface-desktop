@@ -12,6 +12,7 @@ export class IntifaceConfiguration extends EventEmitter {
   private useWebsocketServerInsecure: boolean = true;
   private useWebsocketServerSecure: boolean = false;
   private useProxyServer: boolean = false;
+  private useSimulator: boolean = false;
   // private deviceListUpdateURL: string;
   private websocketServerAllInterfaces: boolean = false;
   private websocketServerInsecurePort: number = 12345;
@@ -122,6 +123,15 @@ export class IntifaceConfiguration extends EventEmitter {
 
   public set UseProxyServer(aShouldListen: boolean) {
     this.useProxyServer = aShouldListen;
+    this.emit("update");
+  }
+
+  public get UseSimulator(): boolean {
+    return this.useSimulator;
+  }
+
+  public set UseSimulator(aShouldListen: boolean) {
+    this.useSimulator = aShouldListen;
     this.emit("update");
   }
 

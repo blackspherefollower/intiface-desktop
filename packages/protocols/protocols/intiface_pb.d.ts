@@ -2,11 +2,110 @@ import * as $protobuf from "protobufjs";
 /** Namespace IntifaceProtocols. */
 export namespace IntifaceProtocols {
 
+    /** Properties of a DeviceMessageAttrs. */
+    interface IDeviceMessageAttrs {
+
+        /** DeviceMessageAttrs msgsAttrs */
+        msgsAttrs?: ({ [k: string]: string }|null);
+    }
+
+    /** Represents a DeviceMessageAttrs. */
+    class DeviceMessageAttrs implements IDeviceMessageAttrs {
+
+        /**
+         * Constructs a new DeviceMessageAttrs.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: IntifaceProtocols.IDeviceMessageAttrs);
+
+        /** DeviceMessageAttrs msgsAttrs. */
+        public msgsAttrs: { [k: string]: string };
+
+        /**
+         * Creates a new DeviceMessageAttrs instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns DeviceMessageAttrs instance
+         */
+        public static create(properties?: IntifaceProtocols.IDeviceMessageAttrs): IntifaceProtocols.DeviceMessageAttrs;
+
+        /**
+         * Encodes the specified DeviceMessageAttrs message. Does not implicitly {@link IntifaceProtocols.DeviceMessageAttrs.verify|verify} messages.
+         * @param message DeviceMessageAttrs message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: IntifaceProtocols.IDeviceMessageAttrs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified DeviceMessageAttrs message, length delimited. Does not implicitly {@link IntifaceProtocols.DeviceMessageAttrs.verify|verify} messages.
+         * @param message DeviceMessageAttrs message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: IntifaceProtocols.IDeviceMessageAttrs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a DeviceMessageAttrs message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns DeviceMessageAttrs
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): IntifaceProtocols.DeviceMessageAttrs;
+
+        /**
+         * Decodes a DeviceMessageAttrs message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns DeviceMessageAttrs
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): IntifaceProtocols.DeviceMessageAttrs;
+
+        /**
+         * Verifies a DeviceMessageAttrs message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a DeviceMessageAttrs message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns DeviceMessageAttrs
+         */
+        public static fromObject(object: { [k: string]: any }): IntifaceProtocols.DeviceMessageAttrs;
+
+        /**
+         * Creates a plain object from a DeviceMessageAttrs message. Also converts values to other types if specified.
+         * @param message DeviceMessageAttrs
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: IntifaceProtocols.DeviceMessageAttrs, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this DeviceMessageAttrs to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a ServerControlMessage. */
     interface IServerControlMessage {
 
         /** ServerControlMessage stop */
         stop?: (IntifaceProtocols.ServerControlMessage.IStop|null);
+
+        /** ServerControlMessage addSimulatedDevice */
+        addSimulatedDevice?: (IntifaceProtocols.ServerControlMessage.IAddSimulatedDevice|null);
+
+        /** ServerControlMessage removeSimulatedDevice */
+        removeSimulatedDevice?: (IntifaceProtocols.ServerControlMessage.IRemoveSimulatedDevice|null);
+
+        /** ServerControlMessage simulatedDeviceMsgIn */
+        simulatedDeviceMsgIn?: (IntifaceProtocols.ServerControlMessage.ISimulatedDeviceMsgIn|null);
     }
 
     /** Represents a ServerControlMessage. */
@@ -21,8 +120,17 @@ export namespace IntifaceProtocols {
         /** ServerControlMessage stop. */
         public stop?: (IntifaceProtocols.ServerControlMessage.IStop|null);
 
+        /** ServerControlMessage addSimulatedDevice. */
+        public addSimulatedDevice?: (IntifaceProtocols.ServerControlMessage.IAddSimulatedDevice|null);
+
+        /** ServerControlMessage removeSimulatedDevice. */
+        public removeSimulatedDevice?: (IntifaceProtocols.ServerControlMessage.IRemoveSimulatedDevice|null);
+
+        /** ServerControlMessage simulatedDeviceMsgIn. */
+        public simulatedDeviceMsgIn?: (IntifaceProtocols.ServerControlMessage.ISimulatedDeviceMsgIn|null);
+
         /** ServerControlMessage msg. */
-        public msg?: "stop";
+        public msg?: ("stop"|"addSimulatedDevice"|"removeSimulatedDevice"|"simulatedDeviceMsgIn");
 
         /**
          * Creates a new ServerControlMessage instance using the specified properties.
@@ -180,6 +288,294 @@ export namespace IntifaceProtocols {
              */
             public toJSON(): { [k: string]: any };
         }
+
+        /** Properties of an AddSimulatedDevice. */
+        interface IAddSimulatedDevice {
+
+            /** AddSimulatedDevice deviceIdent */
+            deviceIdent?: (string|null);
+
+            /** AddSimulatedDevice deviceName */
+            deviceName?: (string|null);
+
+            /** AddSimulatedDevice deviceMsgs */
+            deviceMsgs?: ({ [k: string]: IntifaceProtocols.IDeviceMessageAttrs }|null);
+        }
+
+        /** Represents an AddSimulatedDevice. */
+        class AddSimulatedDevice implements IAddSimulatedDevice {
+
+            /**
+             * Constructs a new AddSimulatedDevice.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: IntifaceProtocols.ServerControlMessage.IAddSimulatedDevice);
+
+            /** AddSimulatedDevice deviceIdent. */
+            public deviceIdent: string;
+
+            /** AddSimulatedDevice deviceName. */
+            public deviceName: string;
+
+            /** AddSimulatedDevice deviceMsgs. */
+            public deviceMsgs: { [k: string]: IntifaceProtocols.IDeviceMessageAttrs };
+
+            /**
+             * Creates a new AddSimulatedDevice instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns AddSimulatedDevice instance
+             */
+            public static create(properties?: IntifaceProtocols.ServerControlMessage.IAddSimulatedDevice): IntifaceProtocols.ServerControlMessage.AddSimulatedDevice;
+
+            /**
+             * Encodes the specified AddSimulatedDevice message. Does not implicitly {@link IntifaceProtocols.ServerControlMessage.AddSimulatedDevice.verify|verify} messages.
+             * @param message AddSimulatedDevice message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: IntifaceProtocols.ServerControlMessage.IAddSimulatedDevice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified AddSimulatedDevice message, length delimited. Does not implicitly {@link IntifaceProtocols.ServerControlMessage.AddSimulatedDevice.verify|verify} messages.
+             * @param message AddSimulatedDevice message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: IntifaceProtocols.ServerControlMessage.IAddSimulatedDevice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an AddSimulatedDevice message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns AddSimulatedDevice
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): IntifaceProtocols.ServerControlMessage.AddSimulatedDevice;
+
+            /**
+             * Decodes an AddSimulatedDevice message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns AddSimulatedDevice
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): IntifaceProtocols.ServerControlMessage.AddSimulatedDevice;
+
+            /**
+             * Verifies an AddSimulatedDevice message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an AddSimulatedDevice message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns AddSimulatedDevice
+             */
+            public static fromObject(object: { [k: string]: any }): IntifaceProtocols.ServerControlMessage.AddSimulatedDevice;
+
+            /**
+             * Creates a plain object from an AddSimulatedDevice message. Also converts values to other types if specified.
+             * @param message AddSimulatedDevice
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: IntifaceProtocols.ServerControlMessage.AddSimulatedDevice, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this AddSimulatedDevice to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a RemoveSimulatedDevice. */
+        interface IRemoveSimulatedDevice {
+
+            /** RemoveSimulatedDevice deviceIdent */
+            deviceIdent?: (string|null);
+        }
+
+        /** Represents a RemoveSimulatedDevice. */
+        class RemoveSimulatedDevice implements IRemoveSimulatedDevice {
+
+            /**
+             * Constructs a new RemoveSimulatedDevice.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: IntifaceProtocols.ServerControlMessage.IRemoveSimulatedDevice);
+
+            /** RemoveSimulatedDevice deviceIdent. */
+            public deviceIdent: string;
+
+            /**
+             * Creates a new RemoveSimulatedDevice instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns RemoveSimulatedDevice instance
+             */
+            public static create(properties?: IntifaceProtocols.ServerControlMessage.IRemoveSimulatedDevice): IntifaceProtocols.ServerControlMessage.RemoveSimulatedDevice;
+
+            /**
+             * Encodes the specified RemoveSimulatedDevice message. Does not implicitly {@link IntifaceProtocols.ServerControlMessage.RemoveSimulatedDevice.verify|verify} messages.
+             * @param message RemoveSimulatedDevice message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: IntifaceProtocols.ServerControlMessage.IRemoveSimulatedDevice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified RemoveSimulatedDevice message, length delimited. Does not implicitly {@link IntifaceProtocols.ServerControlMessage.RemoveSimulatedDevice.verify|verify} messages.
+             * @param message RemoveSimulatedDevice message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: IntifaceProtocols.ServerControlMessage.IRemoveSimulatedDevice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a RemoveSimulatedDevice message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns RemoveSimulatedDevice
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): IntifaceProtocols.ServerControlMessage.RemoveSimulatedDevice;
+
+            /**
+             * Decodes a RemoveSimulatedDevice message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns RemoveSimulatedDevice
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): IntifaceProtocols.ServerControlMessage.RemoveSimulatedDevice;
+
+            /**
+             * Verifies a RemoveSimulatedDevice message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a RemoveSimulatedDevice message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns RemoveSimulatedDevice
+             */
+            public static fromObject(object: { [k: string]: any }): IntifaceProtocols.ServerControlMessage.RemoveSimulatedDevice;
+
+            /**
+             * Creates a plain object from a RemoveSimulatedDevice message. Also converts values to other types if specified.
+             * @param message RemoveSimulatedDevice
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: IntifaceProtocols.ServerControlMessage.RemoveSimulatedDevice, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this RemoveSimulatedDevice to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a SimulatedDeviceMsgIn. */
+        interface ISimulatedDeviceMsgIn {
+
+            /** SimulatedDeviceMsgIn deviceIdent */
+            deviceIdent?: (string|null);
+
+            /** SimulatedDeviceMsgIn jsonMsg */
+            jsonMsg?: (string|null);
+        }
+
+        /** Represents a SimulatedDeviceMsgIn. */
+        class SimulatedDeviceMsgIn implements ISimulatedDeviceMsgIn {
+
+            /**
+             * Constructs a new SimulatedDeviceMsgIn.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: IntifaceProtocols.ServerControlMessage.ISimulatedDeviceMsgIn);
+
+            /** SimulatedDeviceMsgIn deviceIdent. */
+            public deviceIdent: string;
+
+            /** SimulatedDeviceMsgIn jsonMsg. */
+            public jsonMsg: string;
+
+            /**
+             * Creates a new SimulatedDeviceMsgIn instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SimulatedDeviceMsgIn instance
+             */
+            public static create(properties?: IntifaceProtocols.ServerControlMessage.ISimulatedDeviceMsgIn): IntifaceProtocols.ServerControlMessage.SimulatedDeviceMsgIn;
+
+            /**
+             * Encodes the specified SimulatedDeviceMsgIn message. Does not implicitly {@link IntifaceProtocols.ServerControlMessage.SimulatedDeviceMsgIn.verify|verify} messages.
+             * @param message SimulatedDeviceMsgIn message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: IntifaceProtocols.ServerControlMessage.ISimulatedDeviceMsgIn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SimulatedDeviceMsgIn message, length delimited. Does not implicitly {@link IntifaceProtocols.ServerControlMessage.SimulatedDeviceMsgIn.verify|verify} messages.
+             * @param message SimulatedDeviceMsgIn message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: IntifaceProtocols.ServerControlMessage.ISimulatedDeviceMsgIn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SimulatedDeviceMsgIn message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SimulatedDeviceMsgIn
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): IntifaceProtocols.ServerControlMessage.SimulatedDeviceMsgIn;
+
+            /**
+             * Decodes a SimulatedDeviceMsgIn message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SimulatedDeviceMsgIn
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): IntifaceProtocols.ServerControlMessage.SimulatedDeviceMsgIn;
+
+            /**
+             * Verifies a SimulatedDeviceMsgIn message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SimulatedDeviceMsgIn message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SimulatedDeviceMsgIn
+             */
+            public static fromObject(object: { [k: string]: any }): IntifaceProtocols.ServerControlMessage.SimulatedDeviceMsgIn;
+
+            /**
+             * Creates a plain object from a SimulatedDeviceMsgIn message. Also converts values to other types if specified.
+             * @param message SimulatedDeviceMsgIn
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: IntifaceProtocols.ServerControlMessage.SimulatedDeviceMsgIn, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SimulatedDeviceMsgIn to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
     }
 
     /** Properties of a ServerProcessMessage. */
@@ -211,6 +607,9 @@ export namespace IntifaceProtocols {
 
         /** ServerProcessMessage deviceDisconnected */
         deviceDisconnected?: (IntifaceProtocols.ServerProcessMessage.IDeviceDisconnected|null);
+
+        /** ServerProcessMessage simulatedDeviceMsgOut */
+        simulatedDeviceMsgOut?: (IntifaceProtocols.ServerProcessMessage.ISimulatedDeviceMsgOut|null);
     }
 
     /** Represents a ServerProcessMessage. */
@@ -249,8 +648,11 @@ export namespace IntifaceProtocols {
         /** ServerProcessMessage deviceDisconnected. */
         public deviceDisconnected?: (IntifaceProtocols.ServerProcessMessage.IDeviceDisconnected|null);
 
+        /** ServerProcessMessage simulatedDeviceMsgOut. */
+        public simulatedDeviceMsgOut?: (IntifaceProtocols.ServerProcessMessage.ISimulatedDeviceMsgOut|null);
+
         /** ServerProcessMessage msg. */
-        public msg?: ("processStarted"|"processError"|"processEnded"|"processLog"|"buttplugLog"|"clientConnected"|"clientDisconnected"|"deviceConnected"|"deviceDisconnected");
+        public msg?: ("processStarted"|"processError"|"processEnded"|"processLog"|"buttplugLog"|"clientConnected"|"clientDisconnected"|"deviceConnected"|"deviceDisconnected"|"simulatedDeviceMsgOut");
 
         /**
          * Creates a new ServerProcessMessage instance using the specified properties.
@@ -1118,6 +1520,102 @@ export namespace IntifaceProtocols {
 
             /**
              * Converts this DeviceDisconnected to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a SimulatedDeviceMsgOut. */
+        interface ISimulatedDeviceMsgOut {
+
+            /** SimulatedDeviceMsgOut deviceIdent */
+            deviceIdent?: (string|null);
+
+            /** SimulatedDeviceMsgOut jsonMsg */
+            jsonMsg?: (string|null);
+        }
+
+        /** Represents a SimulatedDeviceMsgOut. */
+        class SimulatedDeviceMsgOut implements ISimulatedDeviceMsgOut {
+
+            /**
+             * Constructs a new SimulatedDeviceMsgOut.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: IntifaceProtocols.ServerProcessMessage.ISimulatedDeviceMsgOut);
+
+            /** SimulatedDeviceMsgOut deviceIdent. */
+            public deviceIdent: string;
+
+            /** SimulatedDeviceMsgOut jsonMsg. */
+            public jsonMsg: string;
+
+            /**
+             * Creates a new SimulatedDeviceMsgOut instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SimulatedDeviceMsgOut instance
+             */
+            public static create(properties?: IntifaceProtocols.ServerProcessMessage.ISimulatedDeviceMsgOut): IntifaceProtocols.ServerProcessMessage.SimulatedDeviceMsgOut;
+
+            /**
+             * Encodes the specified SimulatedDeviceMsgOut message. Does not implicitly {@link IntifaceProtocols.ServerProcessMessage.SimulatedDeviceMsgOut.verify|verify} messages.
+             * @param message SimulatedDeviceMsgOut message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: IntifaceProtocols.ServerProcessMessage.ISimulatedDeviceMsgOut, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SimulatedDeviceMsgOut message, length delimited. Does not implicitly {@link IntifaceProtocols.ServerProcessMessage.SimulatedDeviceMsgOut.verify|verify} messages.
+             * @param message SimulatedDeviceMsgOut message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: IntifaceProtocols.ServerProcessMessage.ISimulatedDeviceMsgOut, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SimulatedDeviceMsgOut message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SimulatedDeviceMsgOut
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): IntifaceProtocols.ServerProcessMessage.SimulatedDeviceMsgOut;
+
+            /**
+             * Decodes a SimulatedDeviceMsgOut message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SimulatedDeviceMsgOut
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): IntifaceProtocols.ServerProcessMessage.SimulatedDeviceMsgOut;
+
+            /**
+             * Verifies a SimulatedDeviceMsgOut message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SimulatedDeviceMsgOut message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SimulatedDeviceMsgOut
+             */
+            public static fromObject(object: { [k: string]: any }): IntifaceProtocols.ServerProcessMessage.SimulatedDeviceMsgOut;
+
+            /**
+             * Creates a plain object from a SimulatedDeviceMsgOut message. Also converts values to other types if specified.
+             * @param message SimulatedDeviceMsgOut
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: IntifaceProtocols.ServerProcessMessage.SimulatedDeviceMsgOut, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SimulatedDeviceMsgOut to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -2062,6 +2560,9 @@ export namespace IntifaceProtocols {
 
         /** IntifaceFrontendMessage cancelUpdate */
         cancelUpdate?: (IntifaceProtocols.IntifaceFrontendMessage.ICancelUpdate|null);
+
+        /** IntifaceFrontendMessage serverControlMessage */
+        serverControlMessage?: (IntifaceProtocols.IServerControlMessage|null);
     }
 
     /** Represents an IntifaceFrontendMessage. */
@@ -2127,8 +2628,11 @@ export namespace IntifaceProtocols {
         /** IntifaceFrontendMessage cancelUpdate. */
         public cancelUpdate?: (IntifaceProtocols.IntifaceFrontendMessage.ICancelUpdate|null);
 
+        /** IntifaceFrontendMessage serverControlMessage. */
+        public serverControlMessage?: (IntifaceProtocols.IServerControlMessage|null);
+
         /** IntifaceFrontendMessage msg. */
-        public msg?: ("ok"|"error"|"ready"|"startProcess"|"stopProcess"|"startProxy"|"stopProxy"|"updateConfig"|"checkForUpdates"|"updateEngine"|"updateDeviceFile"|"updateApplication"|"generateCertificate"|"runCertificateAcceptanceServer"|"stopCertificateAcceptanceServer"|"logMessage"|"cancelUpdate");
+        public msg?: ("ok"|"error"|"ready"|"startProcess"|"stopProcess"|"startProxy"|"stopProxy"|"updateConfig"|"checkForUpdates"|"updateEngine"|"updateDeviceFile"|"updateApplication"|"generateCertificate"|"runCertificateAcceptanceServer"|"stopCertificateAcceptanceServer"|"logMessage"|"cancelUpdate"|"serverControlMessage");
 
         /**
          * Creates a new IntifaceFrontendMessage instance using the specified properties.

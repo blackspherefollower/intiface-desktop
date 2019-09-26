@@ -2,12 +2,35 @@ syntax = "proto3";
 package IntifaceProtocols;
 
 // This needs to stay in sync with the Buttplug Server CLI protocols.
+message DeviceMessageAttrs {
+    map<string, string> msgs_attrs = 1;
+}
+
+// This needs to stay in sync with the Buttplug Server CLI protocols.
 message ServerControlMessage {
   message Stop {
   };
 
+  message AddSimulatedDevice {
+    string device_ident = 1;
+    string device_name = 2;
+    map<string, DeviceMessageAttrs> device_msgs = 3;
+  }
+
+  message RemoveSimulatedDevice {
+    string device_ident = 1;
+  }
+
+  message SimulatedDeviceMsgIn {
+    string device_ident = 1;
+    string json_msg = 2;
+  }
+
   oneof msg {
     Stop stop = 1;
+    AddSimulatedDevice add_simulated_device = 2;
+    RemoveSimulatedDevice remove_simulated_device = 3;
+    SimulatedDeviceMsgIn simulated_device_msg_in = 4;
   }
 }
 
@@ -57,6 +80,11 @@ message ServerProcessMessage {
     uint32 device_id = 1;
   };
   
+  message SimulatedDeviceMsgOut {
+    string device_ident = 1;
+    string json_msg = 2;
+  }
+  
   oneof msg {
     ProcessStarted process_started = 1;
     ProcessError process_error = 2;
@@ -67,6 +95,7 @@ message ServerProcessMessage {
     ClientDisconnected client_disconnected = 7;
     DeviceConnected device_connected = 8;
     DeviceDisconnected device_disconnected = 9;
+    SimulatedDeviceMsgOut simulated_device_msg_out = 10;
   };
 }
 
@@ -216,5 +245,6 @@ message IntifaceFrontendMessage {
     StopCertificateAcceptanceServer stop_certificate_acceptance_server = 16;
     LogMessage log_message = 17;
     CancelUpdate cancel_update = 18;
+    ServerControlMessage server_control_message = 19;
   };
 };

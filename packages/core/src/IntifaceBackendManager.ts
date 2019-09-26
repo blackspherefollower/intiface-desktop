@@ -10,6 +10,7 @@ import { IApplicationUpdater } from "./IApplicationUpdater";
 import { IntifaceBackendLogger } from "./IntifaceBackendLogger";
 import isOnline from "is-online";
 import * as winston from "winston";
+import ServerControlMessage = IntifaceProtocols.ServerControlMessage;
 
 // The link between whatever our frontend is (Electron, express, etc) and our
 // IntifaceCLI server process. This will handle loading/saving our configuration
@@ -272,6 +273,22 @@ export class IntifaceBackendManager {
     this._connector.SendOk(aMsg);
   }
 
+  private async ForwardMessage(aMsg: IntifaceProtocols.IntifaceFrontendMessage) {
+    if (aMsg.serverControlMessage == null) {
+      this._connector.SendError(aMsg, "Bad message type");
+      return;
+    }
+    if (this._process) {
+      // This will fire the exit event, which will set the process to null and
+      // update the frontend.
+      await this._process.ForwardMessage(IntifaceProtocols.ServerControlMessage.decode(
+        IntifaceProtocols.ServerControlMessage.encode(aMsg.serverControlMessage).finish()));
+      this._connector.SendOk(aMsg);
+    } else {
+      this._connector.SendError(aMsg, "Server doesn't appear to be running.");
+    }
+  }
+
   private async ReceiveFrontendMessage(aMsg: IntifaceProtocols.IntifaceFrontendMessage) {
     // TODO Feels like there should be a better way to do this :c
     if (aMsg.startProcess !== null) {
@@ -335,6 +352,11 @@ export class IntifaceBackendManager {
 
     if (aMsg.cancelUpdate !== null) {
       await this.CancelUpdate(aMsg);
+      return;
+    }
+
+    if (aMsg.serverControlMessage !== null) {
+      await this.ForwardMessage(aMsg);
       return;
     }
 

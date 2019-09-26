@@ -107,6 +107,16 @@ export class ServerProcess extends EventEmitter {
     this._logger.debug("Waiting for server to go down.");
   }
 
+  public async ForwardMessage(aSvrMsg: IntifaceProtocols.ServerControlMessage) {
+    if (aSvrMsg.stop != null) {
+      await this.StopServer();
+      return;
+    }
+
+    this._logger.debug("Sending on non-stopping message");
+    await this.SendMessage(aSvrMsg);
+  }
+
   protected async BuildServerArguments() {
     const args: string[] = new Array<string>();
     args.push(`--servername`, `${this._config.ServerName}`);

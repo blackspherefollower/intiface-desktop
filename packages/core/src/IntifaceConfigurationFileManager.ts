@@ -52,6 +52,6 @@ export class IntifaceConfigurationFileManager extends IntifaceConfigurationManag
 
   public async Save() {
     const writeFile = promisify(fs.writeFile);
-    await writeFile(this._configPath, JSON.stringify(this._config), { flag: "w+", encoding: "utf-8" });
+    await writeFile(this._configPath, JSON.stringify(this._config, null, 2), { flag: "w+", encoding: "utf-8" });
   }
 }

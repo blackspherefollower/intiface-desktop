@@ -120,6 +120,13 @@ export abstract class FrontendConnector extends EventEmitter {
     await this.SendMessageExpectOk(msg);
   }
 
+  public async SendServerControlMessgae(aSvrMsg: IntifaceProtocols.ServerControlMessage) {
+    const msg = IntifaceProtocols.IntifaceFrontendMessage.create({
+      serverControlMessage: aSvrMsg,
+    });
+    await this.SendMessageExpectOk(msg);
+  }
+
   protected abstract SendMessageInternal(aRawMsg: Buffer): void;
 
   protected SendMessageWithoutReturn(aMsg: IntifaceProtocols.IntifaceFrontendMessage) {
@@ -265,6 +272,10 @@ export abstract class FrontendConnector extends EventEmitter {
 
     if (aMsg.clientDisconnected) {
       this._clientName = null;
+    }
+
+    if (aMsg.simulatedDeviceMsgOut) {
+      this.emit("simulator_message", aMsg.simulatedDeviceMsgOut.deviceIdent, aMsg.simulatedDeviceMsgOut.jsonMsg);
     }
   }
 }

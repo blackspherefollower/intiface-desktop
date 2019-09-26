@@ -132,6 +132,22 @@
           </v-card-text>
         </v-card>
       </v-expansion-panel-content>
+      <v-expansion-panel-content class="transparent">
+        <template v-slot:header>
+          <div>Device Simulator Settings</div>
+        </template>
+        <v-card class="transparent">
+          <v-list><v-list-tile>
+            <v-list-tile-action>
+              <v-checkbox v-model="config.UseSimulator"></v-checkbox>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Enable Simulator</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          </v-list>
+        </v-card>
+      </v-expansion-panel-content>
       <v-expansion-panel-content class="transparent" popout>
         <template v-slot:header>
           <div>Other Settings</div>

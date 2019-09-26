@@ -7,11 +7,23 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
 .addJSON({
   IntifaceProtocols: {
     nested: {
+      DeviceMessageAttrs: {
+        fields: {
+          msgsAttrs: {
+            keyType: "string",
+            type: "string",
+            id: 1
+          }
+        }
+      },
       ServerControlMessage: {
         oneofs: {
           msg: {
             oneof: [
-              "stop"
+              "stop",
+              "addSimulatedDevice",
+              "removeSimulatedDevice",
+              "simulatedDeviceMsgIn"
             ]
           }
         },
@@ -19,11 +31,60 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
           stop: {
             type: "Stop",
             id: 1
+          },
+          addSimulatedDevice: {
+            type: "AddSimulatedDevice",
+            id: 2
+          },
+          removeSimulatedDevice: {
+            type: "RemoveSimulatedDevice",
+            id: 3
+          },
+          simulatedDeviceMsgIn: {
+            type: "SimulatedDeviceMsgIn",
+            id: 4
           }
         },
         nested: {
           Stop: {
             fields: {}
+          },
+          AddSimulatedDevice: {
+            fields: {
+              deviceIdent: {
+                type: "string",
+                id: 1
+              },
+              deviceName: {
+                type: "string",
+                id: 2
+              },
+              deviceMsgs: {
+                keyType: "string",
+                type: "DeviceMessageAttrs",
+                id: 3
+              }
+            }
+          },
+          RemoveSimulatedDevice: {
+            fields: {
+              deviceIdent: {
+                type: "string",
+                id: 1
+              }
+            }
+          },
+          SimulatedDeviceMsgIn: {
+            fields: {
+              deviceIdent: {
+                type: "string",
+                id: 1
+              },
+              jsonMsg: {
+                type: "string",
+                id: 2
+              }
+            }
           }
         }
       },
@@ -39,7 +100,8 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
               "clientConnected",
               "clientDisconnected",
               "deviceConnected",
-              "deviceDisconnected"
+              "deviceDisconnected",
+              "simulatedDeviceMsgOut"
             ]
           }
         },
@@ -79,6 +141,10 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
           deviceDisconnected: {
             type: "DeviceDisconnected",
             id: 9
+          },
+          simulatedDeviceMsgOut: {
+            type: "SimulatedDeviceMsgOut",
+            id: 10
           }
         },
         nested: {
@@ -140,6 +206,18 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
               deviceId: {
                 type: "uint32",
                 id: 1
+              }
+            }
+          },
+          SimulatedDeviceMsgOut: {
+            fields: {
+              deviceIdent: {
+                type: "string",
+                id: 1
+              },
+              jsonMsg: {
+                type: "string",
+                id: 2
               }
             }
           }
@@ -296,7 +374,8 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
               "runCertificateAcceptanceServer",
               "stopCertificateAcceptanceServer",
               "logMessage",
-              "cancelUpdate"
+              "cancelUpdate",
+              "serverControlMessage"
             ]
           }
         },
@@ -372,6 +451,10 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
           cancelUpdate: {
             type: "CancelUpdate",
             id: 18
+          },
+          serverControlMessage: {
+            type: "ServerControlMessage",
+            id: 19
           }
         },
         nested: {

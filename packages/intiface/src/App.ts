@@ -29,6 +29,7 @@ export default class App extends Vue {
   private mini = true;
   private drawer = true;
   private loaded = false;
+  private simulator = false;
   private appErrors: string[] = [];
   private logger!: winston.Logger;
 
@@ -56,6 +57,19 @@ export default class App extends Vue {
       }
     }
     this.config = this.connector!.Config!;
+    this.simulator = this.config.UseSimulator;
+    if (this.simulator) {
+      this.menuList.splice(2, 0, { title: "Device Simulator", icon: "toys", path: "simulator" });
+    }
+    this.config.on("update", () => {
+      if (!this.simulator && this.config.UseSimulator) {
+        this.menuList.splice(2, 0, { title: "Device Simulator", icon: "toys", path: "simulator" });
+        this.simulator = this.config.UseSimulator;
+      } else if (this.simulator && !this.config.UseSimulator) {
+        this.menuList.splice(2, 1);
+        this.simulator = this.config.UseSimulator;
+      }
+    });
     this.logger = IntifaceFrontendLogger.GetChildLogger(this.constructor.name);
     IntifaceFrontendLogger.Instance.on("logged", (transport: any, level: string, msg: string, meta: object) => {
       if (level === "Error") {
